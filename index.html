@@ -192,15 +192,24 @@ section {
   text-align: center;
 }
 .hero__headline {
-  margin-bottom: 24px;
+  margin-bottom: 56px;
   max-width: 920px;
   margin-left: auto;
   margin-right: auto;
 }
-.hero__sub {
-  max-width: 580px;
-  margin: 0 auto 48px;
-  color: var(--ink-soft);
+@media (min-width: 768px) {
+  .hero__headline { margin-bottom: 72px; }
+}
+.hero__caption {
+  max-width: 540px;
+  margin: 40px auto 0;
+  color: var(--ink-muted);
+  font-style: italic;
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+@media (min-width: 768px) {
+  .hero__caption { margin-top: 48px; }
 }
 .hero__image {
   max-width: 360px;
@@ -1054,22 +1063,61 @@ section {
 /* Footer */
 .footer {
   background: var(--bg);
-  padding: 32px 0;
+  padding: 48px 0 40px;
   border-top: 1px solid var(--hairline);
   text-align: center;
+}
+@media (min-width: 768px) {
+  .footer { padding: 64px 0 48px; }
+}
+.footer__inner {
+  max-width: 680px;
+  margin: 0 auto;
 }
 .footer__brand {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+  margin-bottom: 6px;
+}
+.footer__tagline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold-dark);
+  margin-bottom: 24px;
+  letter-spacing: 0.01em;
+}
+.footer__divider {
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+  opacity: 0.5;
 }
 .footer__copy {
+  font-size: 13px;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.footer__legal {
   font-size: 12px;
   color: var(--ink-subtle);
   letter-spacing: 0.04em;
+  line-height: 1.8;
+}
+.footer__legal a {
+  color: var(--ink-muted);
+  transition: color 0.3s var(--ease-out-quint);
+  position: relative;
+}
+.footer__legal a:hover {
+  color: var(--gold-dark);
 }
 
 /* Sticky Mobile CTA */
@@ -1120,12 +1168,12 @@ section {
       <h1 class="display hero__headline reveal">
         Bukti <span class="italic-gold">Nyata</span>: Trading dengan metode simpel hasilnya bisa se-fantastis ini.
       </h1>
-      <p class="body-lg hero__sub reveal reveal-delay-1">
-        Ini adalah mutasi rekening asli. Uang nyata, yang masuk ke bank nyata, hasil dari trading dengan metode yang simpel.
-      </p>
-      <div class="hero__image reveal reveal-delay-2">
+      <div class="hero__image reveal reveal-delay-1">
         <img src="https://drive.google.com/thumbnail?id=1ge4_fKPa2xvKnAJoxuyhX3EkG0e_IFbd&sz=w1000" alt="Bukti mutasi rekening hasil trading Golden Trading Formula" loading="eager">
       </div>
+      <p class="body-lg hero__caption reveal reveal-delay-2">
+        Ini adalah mutasi rekening asli. Uang nyata, yang masuk ke bank nyata, hasil dari trading dengan metode yang simpel.
+      </p>
     </div>
   </div>
 </section>
@@ -1499,7 +1547,7 @@ section {
       </p>
       <p>Pastikan Anda memahami risiko sebelum bertransaksi.</p>
       <p>
-        <a href="#" class="disclaimer__link">Full Disclaimer</a>
+        <a href="https://goldentrading.id/disclaimer" class="disclaimer__link" target="_blank" rel="noopener">Full Disclaimer</a>
       </p>
     </div>
   </div>
@@ -1507,8 +1555,17 @@ section {
 
 <footer class="footer">
   <div class="container">
-    <p class="footer__brand">Golden Trading Formula</p>
-    <p class="footer__copy">© 2026 Golden Trading Formula. All rights reserved.</p>
+    <div class="footer__inner">
+      <p class="footer__brand">Golden Trading Formula</p>
+      <p class="footer__tagline">Trading simpel, hasil nyata.</p>
+      <div class="footer__divider"></div>
+      <p class="footer__copy">
+        &copy; <span id="footerYear">2026</span> Golden Trading Formula. All rights reserved.
+      </p>
+      <p class="footer__legal">
+        Made with care in Indonesia &middot; <a href="https://goldentrading.id/disclaimer" target="_blank" rel="noopener">Disclaimer</a> &middot; <a href="https://goldentrading.id/privacy" target="_blank" rel="noopener">Privacy</a> &middot; <a href="https://goldentrading.id/terms" target="_blank" rel="noopener">Terms</a>
+      </p>
+    </div>
   </div>
 </footer>
 
@@ -1685,6 +1742,12 @@ section {
   };
   window.addEventListener('scroll', stickyObserver, { passive: true });
   stickyObserver();
+
+  // ============================================
+  // FOOTER YEAR — auto update
+  // ============================================
+  const yearEl = document.getElementById('footerYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 })();
 </script>
